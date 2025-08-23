@@ -1,15 +1,15 @@
-# CampusConnect - Cab Pooling App
+# CampusConnect - All in one Campus Utility
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Status: In Development](https://img.shields.io/badge/status-in%20development-orange.svg)
 
-A full-stack web application designed to facilitate cab pooling and ride-sharing within the IIT Guwahati campus community. This project aims to connect students and faculty, making travel more affordable, social, and environmentally friendly.
+A full-stack web application designed to facilitate cab pooling, ride-sharing, buy/sell and others within the IIIT Guwahati campus community. This project aims to connect students and faculty, making travel more affordable, social, and environmentally friendly.
 
 ---
 
 ## Project Overview
 
-CampusConnect allows users to book a cab and make it available for others to join, or to discover and join existing rides created by other campus members. By sharing rides, especially for common destinations like the airport, users can significantly reduce travel costs, build community connections, and minimize their carbon footprint. The platform prioritizes safety by ensuring that all users are members of the campus community.
+As of now CampusConnect allows users to book a cab and make it available for others to join, or to discover and join existing rides created by other campus members. By sharing rides, especially for common destinations like the airport, users can significantly reduce travel costs, build community connections, and minimize their carbon footprint. The platform prioritizes safety by ensuring that all users are members of the campus community.
 
 ---
 
