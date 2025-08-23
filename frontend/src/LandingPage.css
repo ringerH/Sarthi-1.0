@@ -1,0 +1,121 @@
+/* frontend/src/LandingPage.css */
+
+/* Apply the font to the whole page and set a background */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    margin: 0;
+    color: #333;
+}
+
+/* A full-screen wrapper to center the content */
+.landing-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* The main content card with shadow and rounded corners */
+.landing-card {
+    background: white;
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    transform: translateY(-20px);
+    animation: float-up 0.8s ease-out forwards;
+}
+
+@keyframes float-up {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Style for the SVG icon */
+.car-icon {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* Heading styles */
+.landing-card h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #1a253c;
+}
+
+/* Paragraph styles */
+.landing-card p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* Container for the buttons */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Base styles for both buttons */
+.btn {
+    display: inline-block;
+    padding: 14px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Primary button style (Login) */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+/* Secondary button style (Guest) */
+.btn-secondary {
+    background-color: #f8f9fa;
+    color: #343a40;
+    border-color: #dee2e6;
+}
+
+.btn-secondary:hover {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+    transform: translateY(-2px);
+}
+
+/* Make it responsive for mobile devices */
+@media (max-width: 600px) {
+    .landing-card {
+        padding: 30px 25px;
+    }
+
+    .landing-card h1 {
+        font-size: 1.8rem;
+    }
+
+    .landing-card p {
+        font-size: 1rem;
+    }
+}
