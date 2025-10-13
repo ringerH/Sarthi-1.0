@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './LandingPage.css'; // Make sure to create and import the CSS file
+import './LandingPage.css'; 
 
 function LandingPage() {
     return (
@@ -21,8 +21,8 @@ function LandingPage() {
                     </svg>
                 </div>
 
-                <h1>Welcome to CampusConnect</h1>
-                <p>Your one-stop solution for cab pooling and campus connections.</p>
+                <h1>Sarthi Welcomes you!</h1>
+                <p>Your one-stop solution for pooling rides and other utility services.</p>
                 
                 <div className="button-group">
                     <Link to="/login" className="btn btn-primary">

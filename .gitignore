@@ -1,7 +1,22 @@
+# Dependencies
+# Ignore all node_modules directories in the project
+node_modules/
 
-/frontend/node_modules
-/backend/node_modules
-/backend/.env
-/frontend/dist
-.vscode
+# Environment Variables
+# Ignore all .env files to keep secrets out of the repository
+.env
+
+# Production build folder
+# Ignore build output directories
+dist/
+
+# Editor & Operating System files
+# Ignore VS Code editor settings
+.vscode/
+
+# Ignore macOS system files
 .DS_Store
+
+# Logs
+# Ignore npm error logs
+npm-debug.log*

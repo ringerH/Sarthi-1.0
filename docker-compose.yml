@@ -1,0 +1,28 @@
+services:
+  api-gateway:
+    build: ./services/api-gateway
+    ports:
+      - "8080:3000" 
+    restart: always
+    depends_on:
+      - auth-service
+
+  auth-service:
+    build: ./services/auth-service
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+    restart: always
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+volumes:
+  mongo-data:
