@@ -22,9 +22,9 @@ Sarthi 1.0 allows users to book a cab and make it available for others to join, 
 - **Collaborative Workflow**: Established a Git repository with a comprehensive `.gitignore` file for safe team collaboration.
 - **Client-Side Routing**: Implemented `react-router-dom` to manage navigation.
 - **Modern UI Components**: Developed a stylish, responsive landing page as the entry point to the application.
-
+- **User Authentication**(./Sequence_diagram_auth_service.png): Secure sign-up and login for students and faculty.
+  ![Sequence Diagram](./Sequence_diagram_auth_service.png)
 ### Planned ⏳
-- **User Authentication**: Secure sign-up and login for students and faculty.
 - **Ride Management**: Allow users to create, view, and manage their cab bookings.
 - **Ride Discovery**: A searchable interface for users to find available rides based on date and destination.
 - **Join Request System**: Functionality for users to request to join a ride, with notifications sent to the ride creator.
