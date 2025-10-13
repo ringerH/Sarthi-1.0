@@ -1,4 +1,4 @@
-# CampusConnect - All in one Campus Utility
+# Sarthi 1.0 - All in one Campus Utility
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Status: In Development](https://img.shields.io/badge/status-in%20development-orange.svg)
@@ -9,7 +9,7 @@ A full-stack web application designed to facilitate cab pooling, ride-sharing, b
 
 ## Project Overview
 
-As of now CampusConnect allows users to book a cab and make it available for others to join, or to discover and join existing rides created by other campus members. By sharing rides, especially for common destinations like the airport, users can significantly reduce travel costs, build community connections, and minimize their carbon footprint. The platform prioritizes safety by ensuring that all users are members of the campus community.
+As of now Sarthi 1.0 allows users to book a cab and make it available for others to join, or to discover and join existing rides created by other campus members. By sharing rides, especially for common destinations like the airport, users can significantly reduce travel costs, build community connections, and minimize their carbon footprint. The platform prioritizes safety by ensuring that all users are members of the campus community.
 
 ---
 
@@ -94,8 +94,8 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/campus-connect.git](https://github.com/your-username/campus-connect.git)
-    cd campus-connect
+    git clone [https://github.com/your-username/sarthi.git](https://github.com/your-username/sarthi.git)
+    cd sarthi
     ```
 
 2.  **Setup the Backend:**
@@ -156,5 +156,3 @@ Contributions are welcome! Please follow the feature branch workflow to contribu
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
-```
-</markdo
