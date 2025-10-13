@@ -45,6 +45,9 @@ Sarthi 1.0 allows users to book a cab and make it available for others to join, 
 
 ## Project Structure
 
+The project follows a microservices architecture, with a separate frontend and a backend composed of multiple independent services managed by an API Gateway.
+
+```
 /
 ├── frontend/
 │   ├── src/
@@ -65,6 +68,18 @@ Sarthi 1.0 allows users to book a cab and make it available for others to join, 
 ├── .env                  # Environment variables for all services
 ├── docker-compose.yml    # Defines and runs the multi-container application
 └── package.json
+```
+
+### Directory Overview
+
+- **`frontend/`** - Client-side application built with React and Vite
+- **`services/`** - Backend microservices
+  - **`api-gateway/`** - Central routing service that directs requests to appropriate microservices
+  - **`auth-service/`** - Authentication and user management service
+- **`.env`** - Configuration file containing environment variables
+- **`docker-compose.yml`** - Container orchestration configuration
+- **`package.json`** - Root package configuration
+
 ---
 
 ## API Endpoints
@@ -72,7 +87,7 @@ Sarthi 1.0 allows users to book a cab and make it available for others to join, 
 All requests are routed through the API Gateway.
 
 | Method | Endpoint | Description | Status |
-| :--- | :--- | :--- | :--- |
+|:-------|:---------|:------------|:-------|
 | `GET` | `/api/status` | Checks if the backend server is running. | Planned |
 | `POST` | `/api/rides` | Creates a new ride booking. | Planned |
 | `GET` | `/api/rides/search` | Searches for available rides. | Planned |
@@ -96,12 +111,14 @@ Follow these instructions to get the entire application running on your local ma
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/ringerH/Sarthi-1.0]
+    git clone https://github.com/ringerH/Sarthi-1.0
     cd Sarthi-1.0
     ```
 
 2.  **Create the Environment File:**
+    
     Create a `.env` file in the project root. Copy the contents of `.env.example` (if available) or use the following template:
+    
     ```env
     # .env
     MONGO_URI=mongodb://mongo:27017/sarthi_db
@@ -109,12 +126,30 @@ Follow these instructions to get the entire application running on your local ma
     ```
 
 3.  **Build and Run the Application:**
+    
     Use Docker Compose to build the images and start all the services (API Gateway, Auth Service, MongoDB, etc.).
+    
     ```bash
     docker-compose up --build
     ```
+    
     - The **API Gateway** will be accessible at `http://localhost:8080`.
     - The **Frontend** (once added to Docker Compose) will run on its specified port.
 
 ---
 
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
+
+## Contact
+
+For any questions or suggestions, please open an issue on GitHub.
