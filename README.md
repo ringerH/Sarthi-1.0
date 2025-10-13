@@ -45,7 +45,6 @@ Sarthi 1.0 allows users to book a cab and make it available for others to join, 
 
 ## Project Structure
 
-The project follows a microservices architecture, with a separate frontend and a backend composed of multiple independent services managed by an API Gateway.
 /
 ├── frontend/
 │   ├── src/
@@ -66,7 +65,6 @@ The project follows a microservices architecture, with a separate frontend and a
 ├── .env                  # Environment variables for all services
 ├── docker-compose.yml    # Defines and runs the multi-container application
 └── package.json
-
 ---
 
 ## API Endpoints
