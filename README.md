@@ -52,28 +52,46 @@ Sarthi 1.0 allows users to book a cab and make it available for others to join, 
 
 The project follows a microservices architecture, with a separate frontend and a backend composed of multiple independent services managed by an API Gateway.
 
+
 ```
 /
 ├── frontend/
-│   ├── src/
-│   └── package.json
+│   ├── src/                 # React frontend source code
+│   └── package.json         # Frontend dependencies and scripts
 │
 ├── services/
-│   ├── api-gateway/      # Routes incoming requests to the correct service
-│   │   ├── gateway.js
-│   │   └── package.json
+│   ├── api-gateway/         # Routes incoming requests to the correct service
+│   │   ├── server.js        # API Gateway main script
+│   │   └── package.json     # API Gateway dependencies
 │   │
-│   └── auth-service/     # Handles user authentication and management
-│       ├── controllers/
-│       ├── models/
-│       ├── routes/
-│       ├── server.js
-│       └── package.json
+│   ├── auth-service/        # Handles user authentication and management
+│   │   ├── controllers/     # Request handling logic
+│   │   ├── models/          # Database schemas (Mongoose)
+│   │   ├── routes/          # API route definitions
+│   │   ├── server.js        # Service entry point
+│   │   └── package.json     # Auth service dependencies
+│   │
+│   ├── ride-service/        # Handles ride-sharing features
+│   │   ├── controllers/     # Request handling logic
+│   │   ├── middleware/      # Auth middleware, etc.
+│   │   ├── models/          # Database schemas (Mongoose)
+│   │   ├── routes/          # API route definitions
+│   │   ├── server.js        # Service entry point
+│   │   └── package.json     # Ride service dependencies
+│   │
+│   └── marketplace-service/ # Handles buy/sell marketplace features
+│       ├── controllers/     # Request handling logic
+│       ├── middleware/      # Auth middleware, etc.
+│       ├── models/          # Database schemas (Mongoose)
+│       ├── routes/          # API route definitions
+│       ├── server.js        # Service entry point
+│       └── package.json     # Marketplace service dependencies
 │
-├── .env                  # Environment variables for all services
-├── docker-compose.yml    # Defines and runs the multi-container application
-└── package.json
+├── .env                     # Environment variables for all services (Needs Creation)
+├── docker-compose.yml       # Defines and runs the multi-container application
+└── README.md                # Project overview and instructions
 ```
+
 
 ### Directory Overview
 
