@@ -24,11 +24,16 @@ Sarthi 1.0 allows users to book a cab and make it available for others to join, 
 - **Modern UI Components**: Developed a stylish, responsive landing page as the entry point to the application.
 - **User Authentication**(./Sequence_diagram_auth_service.png): Secure sign-up and login for students and faculty.
   ![Sequence Diagram](./Sequence_diagram_auth_service.png)
+- **Ride Management Backend**: Backend logic for creating, viewing (with basic filters), updating, deleting, joining, and leaving rides is implemented in the `ride-service`.
+- **Marketplace Backend**: Backend logic for creating, viewing (with filters), updating, deleting marketplace listings, viewing user-specific listings, and marking items as sold is implemented in the `marketplace-service`.
 ### Planned ⏳
 - **Ride Management**: Allow users to create, view, and manage their cab bookings.
+- **Frontend Integration**: Connect frontend components to backend API endpoints for authentication, data fetching, and data submission.
 - **Ride Discovery**: A searchable interface for users to find available rides based on date and destination.
 - **Join Request System**: Functionality for users to request to join a ride, with notifications sent to the ride creator.
 - **Automatic Cost Splitting**: The system will automatically recalculate and split the cost among all passengers as more people join.
+- **Testing**: Implement comprehensive unit, integration, and end-to-end tests.
+- **Enhanced Security & Error Handling**: Add input validation, rate limiting, and more robust error handling across all services.
 
 ---
 
