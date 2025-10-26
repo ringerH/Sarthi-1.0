@@ -9,12 +9,12 @@ app.use(cors());
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ Auth-Service connected to MongoDB'))
+  .then(() => console.log('Auth-Service connected to MongoDB'))
   .catch(err => console.error('DB Connection Error:', err));
 
-app.use('/', authRoutes); // Use your new routes
+app.use('/', authRoutes); 
 
 const PORT = 5001;
 app.listen(PORT, () => {
-    console.log(`🚀 Auth Service listening on port ${PORT}`);
+    console.log(`Auth Service listening on port ${PORT}`);
 });
