@@ -23,6 +23,25 @@ services:
     volumes:
       - mongo-data:/data/db
     restart: always
+    
+  ride-service:
+    build: ./services/ride-service
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+    restart: always
+    depends_on:
+      - mongo
+
+  marketplace-service:
+    build: ./services/marketplace-service
+    environment:
+      - MONGODB_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - PORT=5000
+    restart: always
+    depends_on:
+      - mongo
 
 volumes:
   mongo-data:

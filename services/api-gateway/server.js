@@ -16,6 +16,10 @@ app.use('/api/rides', createProxyMiddleware({
     pathRewrite: { '^/api/rides': '/' },
 }));
 
-
+app.use('/api/listings', createProxyMiddleware({
+    target: 'http://marketplace-service:5000',
+    changeOrigin: true,
+    pathRewrite: { '^/api/listings': '/api/listings' },
+}));
 
 app.listen(PORT, () => console.log(`API Gateway on port ${PORT}`));
