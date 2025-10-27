@@ -12,11 +12,11 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Ride-Service connected to MongoDB'))
   .catch(err => console.error('DB Connection Error:', err));
 
-app.use('/', rideRoutes);
-
 app.get('/health', (req, res) => {
     res.status(200).json({ status: 'Ride service is running' });
 });
+
+app.use('/', rideRoutes);
 
 const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
