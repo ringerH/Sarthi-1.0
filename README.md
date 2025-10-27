@@ -17,6 +17,8 @@ Sarthi 1.0 allows users to book a cab and make it available for others to join, 
 
 ### Implemented ✅
 - **Microservices Architecture**: Architected the backend using Docker with an API Gateway and distinct services for scalability and maintainability.
+
+  <img src="./Application_Architecture.png" alt="Application Architecture" width="500"/>
 - **MERN Stack Foundation**: Set up a robust project structure with a Node.js/Express backend and a React (Vite) frontend.
 - **Containerized Environment**: Integrated Docker and Docker Compose for consistent development and deployment.
 - **Collaborative Workflow**: Established a Git repository with a comprehensive `.gitignore` file for safe team collaboration.
