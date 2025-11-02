@@ -2,6 +2,12 @@
   "name": "marketplace-service",
   "version": "1.0.0",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node scripts/seedDatabase.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "accepts": "^2.0.0",
     "body-parser": "^2.2.0",
@@ -88,9 +94,8 @@
     "whatwg-url": "^14.2.0",
     "wrappy": "^1.0.2"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   },
   "keywords": [],
   "author": "",
