@@ -1,51 +1,42 @@
-// frontend/src/LoginPage.jsx
-
+// src/LoginPage.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './LoginPage.css'; // We'll create this next
+import { GoogleLogin } from '@react-oauth/google'; // 1. Import
+import { useAuth } from './hooks/useAuth.js'; // 2. Import
+import './LoginPage.css'; 
 
 function LoginPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const { loginWithGoogle } = useAuth(); // 3. Get new function
 
-    const handleSubmit = (event) => {
-        event.preventDefault(); // Prevents the page from reloading
-        // For now, we'll just log the data to the console
-        console.log('Login attempt with:', { email, password });
-        // Later, we'll send this data to our backend API
+    const handleGoogleSuccess = async (credentialResponse) => {
+        try {
+            // 'credentialResponse.credential' is the ID token
+            await loginWithGoogle(credentialResponse.credential);
+        } catch (err) {
+            setError(err.message || 'Login failed. Please try again.');
+        }
     };
 
+    const handleGoogleError = () => {
+        setError('Google login failed. Please try again.');
+    };
+
+    // 4. Replace your form with this
     return (
         <div className="login-wrapper">
             <div className="login-card">
-                <h2>Login</h2>
-                <p>Enter your credentials to access your account.</p>
-                <form onSubmit={handleSubmit}>
-                    <div className="input-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <button type="submit" className="btn btn-primary full-width">Login</button>
-                </form>
-                <p className="signup-link">
-                    Don't have an account? <Link to="/signup">Sign Up</Link>
-                </p>
+                <h2>Welcome to Sarthi</h2>
+                <p>Please sign in with your @iiitg.ac.in account.</p>
+                
+                {error && <p style={{ color: 'red', margin: '10px 0' }}>{error}</p>}
+
+                <div style={{ marginTop: '25px', display: 'flex', justifyContent: 'center' }}>
+                    <GoogleLogin
+                        onSuccess={handleGoogleSuccess}
+                        onError={handleGoogleError}
+                        useOneTap
+                    />
+                </div>
             </div>
         </div>
     );

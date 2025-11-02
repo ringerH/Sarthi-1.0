@@ -76,50 +76,58 @@ exports.getListingById = async (req, res) => {
 // Update listing
 exports.updateListing = async (req, res) => {
     try {
-        const listing = await Listing.findById(req.params.id);
-
-        if (!listing) {
-            return res.status(404).json({ message: 'Listing not found' });
-        }
-
-        // Only creator can update
-        if (listing.createdBy.toString() !== req.user.id) {
-            return res.status(403).json({ message: 'Unauthorized' });
-        }
-
-        const updates = req.body;
-        Object.keys(updates).forEach(key => {
-            listing[key] = updates[key];
-        });
-
-        await listing.save();
-        res.status(200).json({ message: 'Listing updated successfully', listing });
+      const listing = await Listing.findById(req.params.id);
+  
+      if (!listing) {
+        return res.status(404).json({ message: "Listing not found" });
+      }
+  
+      // --- !! OWNER CHECK !! ---
+      // req.user.id comes from your authMiddleware
+      if (listing.createdBy.toString() !== req.user.id) {
+        return res.status(403).json({ message: "User not authorized to update this listing" });
+      }
+  
+      // Update the listing with data from the body
+      const updatedListing = await Listing.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true, runValidators: true } // Return the new doc
+      ).populate('createdBy', 'name email');
+  
+      res.status(200).json({
+        message: "Listing updated successfully",
+        listing: updatedListing
+      });
+  
     } catch (error) {
-        res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
-};
+  };
 
 // Delete listing
 exports.deleteListing = async (req, res) => {
     try {
-        const listing = await Listing.findById(req.params.id);
-
-        if (!listing) {
-            return res.status(404).json({ message: 'Listing not found' });
-        }
-
-        // Only creator can delete
-        if (listing.createdBy.toString() !== req.user.id) {
-            return res.status(403).json({ message: 'Unauthorized' });
-        }
-
-        await listing.deleteOne();
-        res.status(200).json({ message: 'Listing deleted successfully' });
+      const listing = await Listing.findById(req.params.id);
+  
+      if (!listing) {
+        return res.status(404).json({ message: "Listing not found" });
+      }
+  
+      // --- !! OWNER CHECK !! ---
+      if (listing.createdBy.toString() !== req.user.id) {
+        return res.status(403).json({ message: "User not authorized to delete this listing" });
+      }
+  
+      await Listing.findByIdAndDelete(req.params.id);
+  
+      res.status(200).json({ message: "Listing deleted successfully" });
+  
     } catch (error) {
-        res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
-};
-
+  };
+  
 // Get user's own listings
 exports.getMyListings = async (req, res) => {
     try {
