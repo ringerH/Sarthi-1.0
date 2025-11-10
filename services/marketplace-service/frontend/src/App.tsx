@@ -404,25 +404,26 @@ function App() {
                     </p>
                   )}
                   <p className="text-xs text-gray-400 mt-2">
-                    Posted by: {listing.createdBy?.email || 'Unknown User'}
+                     Posted by: {listing.createdBy?.email || 'Unknown User'}
                   </p>
+
                 </div>
                 
                 {/* --- CONDITIONAL EDIT/DELETE BUTTONS --- */}
                 {currentUser && listing.createdBy && currentUser.id === listing.createdBy._id && (
-                  <div className="mt-4 pt-4 border-t border-gray-200 flex space-x-2">
-                    <button
-                      onClick={() => handleEditClick(listing)}
-                      className="text-sm bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(listing._id)}
-                      className="text-sm bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded"
-                    >
-                      Delete
-                    </button>
+                <div className="mt-4 pt-4 border-t border-gray-200 flex space-x-2">
+                  <button
+                    onClick={() => handleEditClick(listing)}
+                    className="text-sm bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded"
+                  >
+                  Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(listing._id)}
+                    className="text-sm bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded"
+                  >
+                  Delete
+                  </button>
                   </div>
                 )}
               </div>
