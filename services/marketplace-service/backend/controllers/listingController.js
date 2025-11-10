@@ -1,3 +1,4 @@
+// services/marketplace-service/backend/controllers/listingController.js
 const Listing = require('../models/listingModel');
 
 // Create a new listing
@@ -13,7 +14,9 @@ exports.createListing = async (req, res) => {
             condition,
             images,
             contactInfo,
-            createdBy: req.user.id
+            createdBy: req.user.id,  // User ID from JWT
+            createdByEmail: req.user.email,  // Store email directly
+            createdByName: req.user.name  // Store name directly
         });
 
         await listing.save();
@@ -32,7 +35,7 @@ exports.getListings = async (req, res) => {
         
         if (category) filter.category = category;
         if (status) filter.status = status;
-        else filter.status = 'available'; // Default to available listings
+        else filter.status = 'available';
         
         if (minPrice || maxPrice) {
             filter.price = {};
@@ -47,11 +50,30 @@ exports.getListings = async (req, res) => {
             ];
         }
 
-        const listings = await Listing.find(filter)
-            .populate('createdBy', 'email')
-            .sort({ createdAt: -1 });
+        // NO POPULATE - data is stored directly
+        const listings = await Listing.find(filter).sort({ createdAt: -1 });
 
-        res.status(200).json({ listings });
+        // Transform to match frontend expectations
+        const transformedListings = listings.map(listing => ({
+            _id: listing._id,
+            title: listing.title,
+            description: listing.description,
+            price: listing.price,
+            category: listing.category,
+            condition: listing.condition,
+            images: listing.images,
+            status: listing.status,
+            contactInfo: listing.contactInfo,
+            createdAt: listing.createdAt,
+            updatedAt: listing.updatedAt,
+            createdBy: {
+                _id: listing.createdBy,
+                email: listing.createdByEmail,
+                name: listing.createdByName
+            }
+        }));
+
+        res.status(200).json({ listings: transformedListings });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -60,14 +82,33 @@ exports.getListings = async (req, res) => {
 // Get listing by ID
 exports.getListingById = async (req, res) => {
     try {
-        const listing = await Listing.findById(req.params.id)
-            .populate('createdBy', 'email');
+        const listing = await Listing.findById(req.params.id);
 
         if (!listing) {
             return res.status(404).json({ message: 'Listing not found' });
         }
 
-        res.status(200).json({ listing });
+        // Transform to match frontend expectations
+        const transformedListing = {
+            _id: listing._id,
+            title: listing.title,
+            description: listing.description,
+            price: listing.price,
+            category: listing.category,
+            condition: listing.condition,
+            images: listing.images,
+            status: listing.status,
+            contactInfo: listing.contactInfo,
+            createdAt: listing.createdAt,
+            updatedAt: listing.updatedAt,
+            createdBy: {
+                _id: listing.createdBy,
+                email: listing.createdByEmail,
+                name: listing.createdByName
+            }
+        };
+
+        res.status(200).json({ listing: transformedListing });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -76,65 +117,104 @@ exports.getListingById = async (req, res) => {
 // Update listing
 exports.updateListing = async (req, res) => {
     try {
-      const listing = await Listing.findById(req.params.id);
-  
-      if (!listing) {
-        return res.status(404).json({ message: "Listing not found" });
-      }
-  
-      // --- !! OWNER CHECK !! ---
-      // req.user.id comes from your authMiddleware
-      if (listing.createdBy.toString() !== req.user.id) {
-        return res.status(403).json({ message: "User not authorized to update this listing" });
-      }
-  
-      // Update the listing with data from the body
-      const updatedListing = await Listing.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        { new: true, runValidators: true } // Return the new doc
-      ).populate('createdBy', 'name email');
-  
-      res.status(200).json({
-        message: "Listing updated successfully",
-        listing: updatedListing
-      });
-  
+        const listing = await Listing.findById(req.params.id);
+
+        if (!listing) {
+            return res.status(404).json({ message: "Listing not found" });
+        }
+
+        // Check ownership - compare as strings
+        if (listing.createdBy !== req.user.id) {
+            return res.status(403).json({ message: "User not authorized to update this listing" });
+        }
+
+        // Update the listing
+        const updatedListing = await Listing.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+
+        // Transform response
+        const transformedListing = {
+            _id: updatedListing._id,
+            title: updatedListing.title,
+            description: updatedListing.description,
+            price: updatedListing.price,
+            category: updatedListing.category,
+            condition: updatedListing.condition,
+            images: updatedListing.images,
+            status: updatedListing.status,
+            contactInfo: updatedListing.contactInfo,
+            createdAt: updatedListing.createdAt,
+            updatedAt: updatedListing.updatedAt,
+            createdBy: {
+                _id: updatedListing.createdBy,
+                email: updatedListing.createdByEmail,
+                name: updatedListing.createdByName
+            }
+        };
+
+        res.status(200).json({
+            message: "Listing updated successfully",
+            listing: transformedListing
+        });
+
     } catch (error) {
-      res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
-  };
+};
 
 // Delete listing
 exports.deleteListing = async (req, res) => {
     try {
-      const listing = await Listing.findById(req.params.id);
-  
-      if (!listing) {
-        return res.status(404).json({ message: "Listing not found" });
-      }
-  
-      // --- !! OWNER CHECK !! ---
-      if (listing.createdBy.toString() !== req.user.id) {
-        return res.status(403).json({ message: "User not authorized to delete this listing" });
-      }
-  
-      await Listing.findByIdAndDelete(req.params.id);
-  
-      res.status(200).json({ message: "Listing deleted successfully" });
-  
+        const listing = await Listing.findById(req.params.id);
+
+        if (!listing) {
+            return res.status(404).json({ message: "Listing not found" });
+        }
+
+        // Check ownership - compare as strings
+        if (listing.createdBy !== req.user.id) {
+            return res.status(403).json({ message: "User not authorized to delete this listing" });
+        }
+
+        await Listing.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({ message: "Listing deleted successfully" });
+
     } catch (error) {
-      res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
-  };
-  
+};
+
 // Get user's own listings
 exports.getMyListings = async (req, res) => {
     try {
         const listings = await Listing.find({ createdBy: req.user.id })
             .sort({ createdAt: -1 });
 
-        res.status(200).json({ listings });
+        // Transform to match frontend expectations
+        const transformedListings = listings.map(listing => ({
+            _id: listing._id,
+            title: listing.title,
+            description: listing.description,
+            price: listing.price,
+            category: listing.category,
+            condition: listing.condition,
+            images: listing.images,
+            status: listing.status,
+            contactInfo: listing.contactInfo,
+            createdAt: listing.createdAt,
+            updatedAt: listing.updatedAt,
+            createdBy: {
+                _id: listing.createdBy,
+                email: listing.createdByEmail,
+                name: listing.createdByName
+            }
+        }));
+
+        res.status(200).json({ listings: transformedListings });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -149,8 +229,8 @@ exports.markAsSold = async (req, res) => {
             return res.status(404).json({ message: 'Listing not found' });
         }
 
-        // Only creator can mark as sold
-        if (listing.createdBy.toString() !== req.user.id) {
+        // Check ownership
+        if (listing.createdBy !== req.user.id) {
             return res.status(403).json({ message: 'Unauthorized' });
         }
 

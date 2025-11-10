@@ -1,16 +1,16 @@
 // src/LoginPage.jsx
 import React, { useState } from 'react';
-import { GoogleLogin } from '@react-oauth/google'; // 1. Import
-import { useAuth } from './hooks/useAuth.js'; // 2. Import
+import { GoogleLogin } from '@react-oauth/google'; 
+import { useAuth } from './hooks/useAuth.js'; 
 import './LoginPage.css'; 
 
 function LoginPage() {
     const [error, setError] = useState('');
-    const { loginWithGoogle } = useAuth(); // 3. Get new function
+    const { loginWithGoogle } = useAuth(); 
 
     const handleGoogleSuccess = async (credentialResponse) => {
         try {
-            // 'credentialResponse.credential' is the ID token
+            
             await loginWithGoogle(credentialResponse.credential);
         } catch (err) {
             setError(err.message || 'Login failed. Please try again.');
@@ -21,7 +21,7 @@ function LoginPage() {
         setError('Google login failed. Please try again.');
     };
 
-    // 4. Replace your form with this
+    
     return (
         <div className="login-wrapper">
             <div className="login-card">

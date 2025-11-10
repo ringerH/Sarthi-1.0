@@ -1,4 +1,4 @@
-/* frontend/src/LoginPage.css */
+
 
 .login-wrapper {
     display: flex;
@@ -49,7 +49,7 @@
     border: 1px solid #ced4da;
     border-radius: 8px;
     font-size: 1rem;
-    box-sizing: border-box; /* Important for padding */
+    box-sizing: border-box; 
 }
 
 .btn.full-width {

@@ -155,7 +155,7 @@ try {
 Write-Host "`n========================================" -ForegroundColor Cyan
 Write-Host "Smoke Test Complete!" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "`nNote: In case of failure, we check:" -ForegroundColor Yellow
+Write-Host "`nNote: In case of failure, we check if,:" -ForegroundColor Yellow
 Write-Host "  1. Server is running on port 5000"
 Write-Host "  2. JWT token is valid and not expired"
 Write-Host "  3. MongoDB is connected"

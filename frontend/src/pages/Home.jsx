@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Home() {
-  // 🎯 Centralized ad data — easy to edit or load from API later
   const ads = [
     {
       title: 'IIITG Tech Fest 2025',
